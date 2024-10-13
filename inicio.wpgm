@@ -1,8 +1,8 @@
 import wollok.game.*
-import personaje.*
-import constantes.*
+import jugador.*
+import utiles.*
+import pc.*
 
-//import pc.*
 program inicio {
 	game.width(30)
 	game.height(20)
@@ -11,6 +11,9 @@ program inicio {
 	game.boardGround("escena.png")
 	
 	game.addVisual(jugador)
+	game.addVisual(pc)
+	
+	celdasOcupadas.ocupar(pc.position())
 	
 	game.start()
 	
