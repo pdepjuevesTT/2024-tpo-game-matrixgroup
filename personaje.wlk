@@ -1,36 +1,26 @@
+import constantes.*
+
 object jugador {
-  var property position = game.center()
-  var property image = "jugador.png"
-
-//Orientacion del jugador:
-				var property orientacion = 0
-
-        //Direcciones:
-					var property arriba = 0
-					var property abajo = 1
-					var property izquierda = 2
-					var property derecha = 3
-    method giro(){
-		
-				if (orientacion == arriba){
-					image = "jugador_back.png"
-				}
-				
-				if (orientacion == abajo){
-					image = "jugador.png"
-				}
-				
-				if (orientacion == izquierda){
-					image = "jugador_left.png"
-				}
-				
-				if (orientacion == derecha){
-					image = "jugador_right.png"
-				}
-			}
-
-      
+	var property position = game.center()
+	var property image = "jugador.png"
+	
+	method moverseArriba() {
+		position = if ((position.y() + 1) > 17) position else position.up(1)
+		image = "jugador_back.png"
+	}
+	
+	method moverseAbajo() {
+		position = if ((position.y() - 1) < 0) position else position.down(1)
+		image = "jugador.png"
+	}
+	
+	method moverseIzquierda() {
+		position = if ((position.x() - 1) < 0) position else position.left(1)
+		image = "jugador_left.png"
+	}
+	
+	method moverseDerecha() {
+		position = if ((position.x() + 1) > 29) position else position.right(1)
+		image = "jugador_right.png"
+	}
 }
-
-
-			

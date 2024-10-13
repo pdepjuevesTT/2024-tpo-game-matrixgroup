@@ -1,43 +1,21 @@
 import wollok.game.*
 import personaje.*
-import pc.*
+import constantes.*
 
+//import pc.*
 program inicio {
-  game.width(30)
-  game.height(20)
-  game.cellSize(32)
-  game.title("Wollok Tycoon")
-  game.boardGround("escena.png")
-  
-  //Visuales
-
-  game.addVisualCharacter(jugador)
-  game.addVisual(pc)
-  game.start()
-
-  //Interacciones del jugador:
-				
-					//Arriba:
-					keyboard.up().onPressDo{jugador.position(jugador.position().up(1));
-						jugador.orientacion(0);
-						jugador.giro()
-					}
-					
-					//Abajo:
-					keyboard.down().onPressDo{jugador.position(jugador.position().down(1));
-						jugador.orientacion(1);
-						jugador.giro()
-					}
-		
-					//Izquierda:
-					keyboard.left().onPressDo{jugador.position(jugador.position().left(1));
-						jugador.orientacion(2);
-						jugador.giro()
-					}
-											
-					//Derecha:
-					keyboard.right().onPressDo{jugador.position(jugador.position().right(1));
-						jugador.orientacion(3);
-						jugador.giro()
-					}
+	game.width(30)
+	game.height(20)
+	game.cellSize(32)
+	game.title("Wollok Tycoon")
+	game.boardGround("escena.png")
+	
+	game.addVisual(jugador)
+	
+	game.start()
+	
+	keyboard.up().onPressDo({ jugador.moverseArriba() })
+	keyboard.down().onPressDo({ jugador.moverseAbajo() })
+	keyboard.left().onPressDo({ jugador.moverseIzquierda() })
+	keyboard.right().onPressDo({ jugador.moverseDerecha() })
 }
