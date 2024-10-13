@@ -1,5 +1,6 @@
 import wollok.game.*
 import personaje.*
+import pc.*
 
 program inicio {
   game.width(30)
@@ -8,7 +9,35 @@ program inicio {
   game.title("Wollok Tycoon")
   game.boardGround("escena.png")
   
-  game.addVisualCharacter(personaje)
-  
+  //Visuales
+
+  game.addVisualCharacter(jugador)
+  game.addVisual(pc)
   game.start()
+
+  //Interacciones del jugador:
+				
+					//Arriba:
+					keyboard.up().onPressDo{jugador.position(jugador.position().up(1));
+						jugador.orientacion(0);
+						jugador.giro()
+					}
+					
+					//Abajo:
+					keyboard.down().onPressDo{jugador.position(jugador.position().down(1));
+						jugador.orientacion(1);
+						jugador.giro()
+					}
+		
+					//Izquierda:
+					keyboard.left().onPressDo{jugador.position(jugador.position().left(1));
+						jugador.orientacion(2);
+						jugador.giro()
+					}
+											
+					//Derecha:
+					keyboard.right().onPressDo{jugador.position(jugador.position().right(1));
+						jugador.orientacion(3);
+						jugador.giro()
+					}
 }
