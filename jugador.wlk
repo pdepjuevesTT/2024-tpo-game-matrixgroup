@@ -9,7 +9,7 @@ object jugador {
 		           		position.up(1)
 		           	)) position
 		           else position.up(1)
-		image = "jugador_espalda.png"
+		image = "jugador_atras.png"
 	}
 	
 	method moverseAbajo() {
