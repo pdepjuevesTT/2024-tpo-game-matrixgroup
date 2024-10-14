@@ -5,7 +5,7 @@ object jugador {
 	var property image = "jugador.png"
 	
 	method moverseArriba() {
-		position = if (((position.y() + 1) > 17) || celdasOcupadas.estaOcupada(
+		position = if (((position.y() + 1) > 7) || celdasOcupadas.estaOcupada(
 		           		position.up(1)
 		           	)) position
 		           else position.up(1)
@@ -29,7 +29,7 @@ object jugador {
 	}
 	
 	method moverseDerecha() {
-		position = if (((position.x() + 1) > 29) || celdasOcupadas.estaOcupada(
+		position = if (((position.x() + 1) > 19) || celdasOcupadas.estaOcupada(
 		           		position.right(1)
 		           	)) position
 		           else position.right(1)

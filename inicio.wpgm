@@ -4,9 +4,9 @@ import utiles.*
 import pc.*
 
 program inicio {
-	game.width(30)
-	game.height(20)
-	game.cellSize(32)
+	game.width(20)
+	game.height(10)
+	game.cellSize(64)
 	game.title("Wollok Tycoon")
 	game.boardGround("escena.png")
 	
