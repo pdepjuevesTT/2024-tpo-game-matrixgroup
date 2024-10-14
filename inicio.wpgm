@@ -12,7 +12,7 @@ program inicio {
 	
 	game.addVisual(jugador)
 	game.addVisual(computadora)
-	
+	game.addVisual(plata)
 	celdasOcupadas.ocupar(computadora.position())
 	
 	game.start()
