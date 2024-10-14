@@ -2,14 +2,14 @@ import utiles.*
 
 object jugador {
 	var property position = game.center()
-	var property image = "jugador.png"
+	var property image = "jugador_frente.png"
 	
 	method moverseArriba() {
 		position = if (((position.y() + 1) > 7) || celdasOcupadas.estaOcupada(
 		           		position.up(1)
 		           	)) position
 		           else position.up(1)
-		image = "jugador_back.png"
+		image = "jugador_espalda.png"
 	}
 	
 	method moverseAbajo() {
@@ -17,7 +17,7 @@ object jugador {
 		           		position.down(1)
 		           	)) position
 		           else position.down(1)
-		image = "jugador.png"
+		image = "jugador_frente.png"
 	}
 	
 	method moverseIzquierda() {
@@ -25,7 +25,7 @@ object jugador {
 		           		position.left(1)
 		           	)) position
 		           else position.left(1)
-		image = "jugador_left.png"
+		image = "jugador_izquierda.png"
 	}
 	
 	method moverseDerecha() {
@@ -33,6 +33,6 @@ object jugador {
 		           		position.right(1)
 		           	)) position
 		           else position.right(1)
-		image = "jugador_right.png"
+		image = "jugador_derecha.png"
 	}
 }

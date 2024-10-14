@@ -1,19 +1,19 @@
 import wollok.game.*
 import jugador.*
 import utiles.*
-import pc.*
+import computadora.*
 
 program inicio {
 	game.width(20)
 	game.height(10)
 	game.cellSize(64)
 	game.title("Wollok Tycoon")
-	game.boardGround("escena.png")
+	game.boardGround("fondo_1.png")
 	
 	game.addVisual(jugador)
-	game.addVisual(pc)
+	game.addVisual(computadora)
 	
-	celdasOcupadas.ocupar(pc.position())
+	celdasOcupadas.ocupar(computadora.position())
 	
 	game.start()
 	
