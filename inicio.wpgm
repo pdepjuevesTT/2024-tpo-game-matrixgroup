@@ -2,6 +2,7 @@ import wollok.game.*
 import jugador.*
 import utiles.*
 import computadora.*
+import elementos.*
 
 program inicio {
 	game.width(20)
@@ -11,14 +12,19 @@ program inicio {
 	game.boardGround("fondo_1.png")
 	
 	game.addVisual(jugador)
+	
 	game.addVisual(computadora)
 	game.addVisual(plata)
+	game.addVisual(silla)
+	
 	celdasOcupadas.ocupar(computadora.position())
 	
-	game.start()
+	game.whenCollideDo(silla, { personaje => personaje.aumentarDinero(50) })
 	
 	keyboard.up().onPressDo({ jugador.moverseArriba() })
 	keyboard.down().onPressDo({ jugador.moverseAbajo() })
 	keyboard.left().onPressDo({ jugador.moverseIzquierda() })
 	keyboard.right().onPressDo({ jugador.moverseDerecha() })
+	
+	game.start()
 }
