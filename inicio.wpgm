@@ -26,6 +26,7 @@ program inicio {
 	keyboard.right().onPressDo({ jugador.moverseDerecha() })
 // Teclas especiales
 		keyboard.e().onPressDo({jugador.programar()})
-
+		keyboard.r().onPressDo({jugador.mejoraJugador()})
+		
 	game.start()
 }

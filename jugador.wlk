@@ -1,12 +1,12 @@
 import utiles.*
-import computadora.computadora
+import computadora.*
 
 object jugador {
 	var property position = game.center()
 	var property image = "jugador_frente.png"
 	var property dinero = 0
 	var property intelecto = 0
-	
+	var property cont = 0
 	// -------------------
 	method aumentarDinero(monto) {
 		dinero += monto
@@ -41,6 +41,13 @@ object jugador {
 				
 				
 			}
+	}
+
+// -------------------- MEJORA
+	method mejoraJugador(){
+		// se le pasa la lista de objetos de mejoras, pero viendolo bien, si quisieramos una lista de mejoras de otra cosa, necesitariamos otro contador
+		listaDeMejorasPc.get(self.cont()).mejora()
+		cont +=1
 	}
 
 
@@ -122,7 +129,7 @@ class NPC {
 }
 //----------------------------------------------
 const cliente = new NPC(
-		objetivo = game.at(5, 5),
+		objetivo = game.at(5, 1),
 		frente = "jugador_frente.png",
 		atras = "jugador_atras.png",
 		izquierda = "jugador_izquierda.png",
@@ -186,5 +193,40 @@ class Barra{
 
 	}
 
-const barraCliente = new Barra(position = game.at(6,5), lista = listaDeBarrasDescendente)
+const barraCliente = new Barra(position = game.at(6,1), lista = listaDeBarrasDescendente)
 const barraComputadora = new Barra(position = game.at(5,9), lista = listaDeBarrasAscendente)
+
+// MEJORAS
+class Mejora {
+	var property requisitoParaMejora // Por ejemplo, dinero del jugador > 50 e intelecto > 10
+	var property requisitoPosicionJugador // Donde tiene que estar parado el jugador
+	var property numeroMejora //Se coloca el numero de mejora para usarlo de indice
+	var property listaMejoras /*se le pasa la lista de mejoras de un objeto, por ejemplo listaMejorasPc que tiene la pc base, la pc junior, la pc senior, etc...*/
+	var property objetoActual = listaMejoras.get(numeroMejora-1)
+	var property objetoNuevo = listaMejoras.get(numeroMejora)
+	method mejora(){
+		if(requisitoParaMejora.apply() && requisitoPosicionJugador.apply()){
+
+		game.removeVisual(objetoActual)
+		game.addVisual(objetoNuevo)
+	}
+	
+	}
+	
+		
+}
+// ----------------------------------------------
+const mejora1 = new Mejora(
+	numeroMejora = 1,
+	listaMejoras = listaObjetosPc,
+	requisitoParaMejora = {jugador.dinero() >50} , 
+	requisitoPosicionJugador = {jugador.estaSentado()})
+	
+
+const mejora2 = new Mejora(numeroMejora = 2, listaMejoras = listaObjetosPc,  requisitoParaMejora = {jugador.dinero() > 100}, requisitoPosicionJugador = {jugador.estaSentado()})
+// ATENCION!! para agregar una mejora mas, hay que agregar otra imagen a listaObjetosPc
+// --------------------------------------------
+const listaObjetosPc = [computadora,computadora2, computadora3] // Acá, y en orden hay que agregar los objetos que se van a ir mejorando
+
+const listaDeMejorasPc = [mejora1, mejora2] // las mejoras agregadas hay que agregarlas aca, tal vez se pueda intentar hacerlo automatico.
+
