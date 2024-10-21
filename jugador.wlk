@@ -98,7 +98,7 @@ class NPC {
 	
 	method seVa(){
 		if(barraCliente.barraFinaliza()){ // Cuando se acaba la barra de paciencia desaparece
-			game.removeVisual(self)
+			objetivo = game.at(-1, 1)
 					}
 	}
 
@@ -127,6 +127,11 @@ class NPC {
 		self.seVa()
 	}
 }
+
+object salida {
+	method position() = game.at(-1, 1)
+}
+
 //----------------------------------------------
 const cliente = new NPC(
 		objetivo = game.at(5, 1),

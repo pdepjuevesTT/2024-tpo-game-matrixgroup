@@ -19,6 +19,9 @@ program inicio {
 	game.onTick(500, "cliente", { cliente.mover() })
 	
 	game.onTick(2000, "Barra", {barraCliente.paciencia(cliente.llego())})
+
+	game.onCollideDo(salida, { npc => game.removeVisual(npc)})
+
 // Teclas de movimiento
 	keyboard.up().onPressDo({ jugador.moverseArriba() })
 	keyboard.down().onPressDo({ jugador.moverseAbajo() })
