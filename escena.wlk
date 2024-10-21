@@ -16,4 +16,5 @@ class Escena {
 }
 
 
-const oficina1 = new Escena(visuales = [jugador, computadora, plata, silla, intelecto, mostrador, cliente])
+const oficina1 = new Escena(visuales = [jugador, computadora, plata, 
+silla, intelecto, mostrador, cliente, barraCliente, barraComputadora])

@@ -54,6 +54,12 @@ class NPC {
 	
 	method llego() = position == objetivo
 	
+	method seVa(){
+		if(barraCliente.barraLimite()){ // Cuando se acaba la barra de paciencia desaparece
+			game.removeVisual(self)
+					}
+	}
+
 	method mover() {
 		if (!self.llego()) {
 			if (position.x() < objetivo.x()) {
@@ -76,6 +82,7 @@ class NPC {
 				}
 			}
 		}
+		self.seVa()
 	}
 }
 //----------------------------------------------
@@ -108,3 +115,39 @@ object silla {
 	
 	method image() = "silla.png"
 }
+
+const listaDeBarrasDescendente = ["barra1.png","barra2.png","barra3.png","barra4.png", "barra4.png"]
+const listaDeBarrasAscendente = ["barra4.png","barra3.png","barra2.png","barra1.png","barra1.png"]
+class Barra{
+	var property position
+	var property image = 0
+	var property x = 0
+	var property lista
+	var property tamList = lista.size() 
+
+	method barraLimite() = x == tamList // momento donde llega hasta la última imagen.
+
+	// condicionLlegada es la posición del objeto en relación al personaje, puede ser por ejemplo cliente.llego() o jugador.estaSentado()
+	method paciencia(condicionLlegada){
+		if(condicionLlegada && x < tamList	){
+	
+			image = lista.get(x)
+			x += 1
+		}
+		if(self.barraLimite()){
+			
+			game.removeVisual(self)
+		}
+	}
+	
+		method reiniciarBarra(){
+			game.removeVisual(self)
+			self.x(0)
+			game.addVisual(self)
+		}
+
+
+	}
+
+const barraCliente = new Barra(position = game.at(6,5), lista = listaDeBarrasDescendente)
+const barraComputadora = new Barra(position = game.at(5,9), lista = listaDeBarrasAscendente)
