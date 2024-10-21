@@ -12,25 +12,11 @@ program inicio {
 	game.title("Wollok Tycoon")
 	game.boardGround("fondo_1.png")
 	
-	const cliente = new NPC(
-		objetivo = game.at(5, 5),
-		frente = "jugador_frente.png",
-		atras = "jugador_atras.png",
-		izquierda = "jugador_izquierda.png",
-		derecha = "jugador_derecha.png"
-	)
-	
-	const mostrador = new Mostrador(position = game.at(5, 2))
-	
-	game.addVisual(mostrador)
-	
-	game.addVisual(cliente)
-	
 	oficina1.cargarVisuales()
 	
 	celdasOcupadas.ocupar(computadora.position())
 	
-	game.onTick(1000, "cliente", { cliente.mover() })
+	game.onTick(500, "cliente", { cliente.mover() })
 	
 	game.whenCollideDo(silla, { personaje => personaje.aumentarDinero(50) })
 	

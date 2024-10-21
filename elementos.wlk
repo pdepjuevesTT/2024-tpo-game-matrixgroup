@@ -30,3 +30,7 @@ class BloqueMostrador {
 class BloqueInvisible {
   var property position
 }
+
+// ------------------------------------------------------
+const mostrador = new Mostrador(position = game.at(5, 2))
+// ------------------------------------------------------

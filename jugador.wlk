@@ -4,8 +4,8 @@ import computadora.computadora
 object jugador {
 	var property position = game.center()
 	var property image = "jugador_frente.png"
-	var property dinero = 14000
-	
+	var property dinero = 0
+	var property intelecto = 0
 	method aumentarDinero(monto) {
 		dinero += monto
 	}
@@ -78,13 +78,29 @@ class NPC {
 		}
 	}
 }
+//----------------------------------------------
+const cliente = new NPC(
+		objetivo = game.at(5, 5),
+		frente = "jugador_frente.png",
+		atras = "jugador_atras.png",
+		izquierda = "jugador_izquierda.png",
+		derecha = "jugador_derecha.png"
+	)
 
+
+//----------------------------------------------
 object plata {
 	method position() = game.center().right(8).down(5)
 	
 	method text() = jugador.dinero().toString() + " $"
 	
 	method textColor() = "00FF00FF"
+}
+
+object intelecto {
+	method position() = game.center().right(9).down(5)
+	method text() = jugador.intelecto().toString()
+
 }
 
 object silla {
