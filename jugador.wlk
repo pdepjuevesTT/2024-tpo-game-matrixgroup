@@ -6,10 +6,45 @@ object jugador {
 	var property image = "jugador_frente.png"
 	var property dinero = 0
 	var property intelecto = 0
+	
+	// -------------------
 	method aumentarDinero(monto) {
 		dinero += monto
 	}
-	
+
+	method aumentarIntelecto(monto){
+		intelecto += monto
+	}
+
+	method estaSentado() =self.position() == silla.position()
+
+	// Funcion para que el jugador programe
+	method programar() {
+		//Arranca la cuenta regresiva cuando aprieta la E para programar
+		if(self.estaSentado()){
+			game.onTick(2000, "Evento de progreso de Codigo", {self.resultadoProgramar()})
+			if(barraComputadora.barraFinaliza()){ 
+			barraComputadora.reiniciarBarra() 
+			// Cuando termina la Barra, se encarga de volver a setear su contador en cero.
+			}
+		}
+	}
+
+	method resultadoProgramar(){
+		barraComputadora.paciencia(self.estaSentado())
+		if(barraComputadora.barraFinaliza()){
+				//En este sector se agrega lo que tiene que pasar cuando termina de programar.
+				self.aumentarIntelecto(1)
+				self.aumentarDinero(51)
+
+				game.removeTickEvent("Evento de progreso de Codigo")// Necesario para detener el loop
+				
+				
+			}
+	}
+
+
+	// ------------------- MOVIMIENTO
 	method moverseArriba() {
 		position = if (((position.y() + 1) > 7) || celdasOcupadas.estaOcupada(
 		           		position.up(1)
@@ -42,7 +77,7 @@ object jugador {
 		image = "jugador_derecha.png"
 	}
 }
-
+// ---------------- NPC
 class NPC {
 	var property position = game.origin()
 	var property image = "jugador_frente.png"
@@ -55,7 +90,7 @@ class NPC {
 	method llego() = position == objetivo
 	
 	method seVa(){
-		if(barraCliente.barraLimite()){ // Cuando se acaba la barra de paciencia desaparece
+		if(barraCliente.barraFinaliza()){ // Cuando se acaba la barra de paciencia desaparece
 			game.removeVisual(self)
 					}
 	}
@@ -96,6 +131,7 @@ const cliente = new NPC(
 
 
 //----------------------------------------------
+// Texto contador de dinero del jugador
 object plata {
 	method position() = game.center().right(8).down(5)
 	
@@ -104,6 +140,7 @@ object plata {
 	method textColor() = "00FF00FF"
 }
 
+// Texto contador de intelecto del jugador
 object intelecto {
 	method position() = game.center().right(9).down(5)
 	method text() = jugador.intelecto().toString()
@@ -121,20 +158,20 @@ const listaDeBarrasAscendente = ["barra4.png","barra3.png","barra2.png","barra1.
 class Barra{
 	var property position
 	var property image = 0
-	var property x = 0
+	var property contador = 0
 	var property lista
 	var property tamList = lista.size() 
 
-	method barraLimite() = x == tamList // momento donde llega hasta la última imagen.
+	method barraFinaliza() = contador == tamList // momento donde llega hasta la última imagen.
 
-	// condicionLlegada es la posición del objeto en relación al personaje, puede ser por ejemplo cliente.llego() o jugador.estaSentado()
-	method paciencia(condicionLlegada){
-		if(condicionLlegada && x < tamList	){
+	// condicionInicioBarra es la posición del objeto en relación al personaje, puede ser por ejemplo cliente.llego() o jugador.estaSentado()
+	method paciencia(condicionInicioBarra){
+		if(condicionInicioBarra && contador < tamList	){
 	
-			image = lista.get(x)
-			x += 1
+			image = lista.get(contador)
+			contador += 1
 		}
-		if(self.barraLimite()){
+		if(self.barraFinaliza()){
 			
 			game.removeVisual(self)
 		}
@@ -142,7 +179,7 @@ class Barra{
 	
 		method reiniciarBarra(){
 			game.removeVisual(self)
-			self.x(0)
+			self.contador(0)
 			game.addVisual(self)
 		}
 
