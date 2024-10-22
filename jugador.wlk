@@ -127,7 +127,7 @@ class NPC {
 		}
 		self.seVa()
 	}
-} //----------------------------------------------
+}
 
 object salida {
 	method position() = game.at(-1, 1)
