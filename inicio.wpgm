@@ -12,21 +12,17 @@ program inicio {
 	game.title("Wollok Tycoon")
 	game.boardGround("fondo_1.png")
 	
-	oficina1.cargarVisuales()
+	oficina1.cargarEscena()
 	
-	celdasOcupadas.ocupar(computadora.position())
+	game.onCollideDo(salida, { npc => game.removeVisual(npc) })
 	
-	game.onTick(500, "cliente", { cliente.mover() })
-	
-	game.onTick(2000, "Barra", {barraCliente.paciencia(cliente.llego())})
-// Teclas de movimiento
 	keyboard.up().onPressDo({ jugador.moverseArriba() })
 	keyboard.down().onPressDo({ jugador.moverseAbajo() })
 	keyboard.left().onPressDo({ jugador.moverseIzquierda() })
 	keyboard.right().onPressDo({ jugador.moverseDerecha() })
-// Teclas especiales
-		keyboard.e().onPressDo({jugador.programar()})
-		keyboard.r().onPressDo({jugador.mejoraJugador()})
-		
+	
+	keyboard.e().onPressDo({ jugador.programar() })
+	keyboard.r().onPressDo({ jugador.mejoraJugador() })
+	
 	game.start()
 }

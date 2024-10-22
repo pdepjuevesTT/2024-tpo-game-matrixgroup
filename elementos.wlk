@@ -1,3 +1,5 @@
+import utiles.celdasOcupadas
+
 class Mostrador {
   var property position
   var property izquierda
@@ -14,11 +16,17 @@ class Mostrador {
     game.addVisual(derecha)
     game.addVisual(celdaAtencion)
     
+    celdasOcupadas.ocupar(position)
+    celdasOcupadas.ocupar(izquierda.position())
+    celdasOcupadas.ocupar(derecha.position())
+    
     game.onCollideDo(
       celdaAtencion,
       { cliente => console.println("Atendiendo cliente: " + cliente) }
     )
   }
+
+  // No esta controlado el caso en el que se cambie la posicion del mostrador
 }
 
 class BloqueMostrador {
@@ -29,8 +37,6 @@ class BloqueMostrador {
 
 class BloqueInvisible {
   var property position
-}
+} // ------------------------------------------------------
 
-// ------------------------------------------------------
 const mostrador = new Mostrador(position = game.at(5, 2))
-// ------------------------------------------------------
