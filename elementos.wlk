@@ -40,3 +40,4 @@ class BloqueInvisible {
 } // ------------------------------------------------------
 
 const mostrador = new Mostrador(position = game.at(5, 2))
+const entradatienda = new BloqueInvisible(position = game.at(8,6))

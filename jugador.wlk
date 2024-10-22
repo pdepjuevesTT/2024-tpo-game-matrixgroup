@@ -1,5 +1,8 @@
+import escena.*
 import utiles.*
 import computadora.*
+import elementos.*
+import tienda.*
 
 object jugador {
 	var property position = game.center()
@@ -18,6 +21,7 @@ object jugador {
 	}
 	
 	method estaSentado() = self.position() == silla.position()
+	method enTienda() = self.position() == entradatienda.position()
 	// Funcion para que el jugador programe
 	
 	method programar() {
@@ -45,6 +49,13 @@ object jugador {
 		}
 	}
 	
+	method tienda(){
+		if (self.enTienda()){
+			game.say(tienda, "J: Empleados $100")
+			game.schedule(1000, {game.say(tienda, "K: Servidores $200")})
+		}
+	}
+
 	// -------------------- MEJORA
 	method mejoraJugador() {
 		// se le pasa la lista de objetos de mejoras, pero viendolo bien, si quisieramos una lista de mejoras de otra cosa, necesitariamos otro contador

@@ -22,6 +22,7 @@ program inicio {
 	keyboard.right().onPressDo({ jugador.moverseDerecha() })
 	
 	keyboard.e().onPressDo({ jugador.programar() })
+	keyboard.e().onPressDo({ jugador.tienda()}) // TESTING
 	keyboard.r().onPressDo({ jugador.mejoraJugador() })
 	
 	game.start()

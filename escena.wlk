@@ -2,6 +2,7 @@ import jugador.*
 import utiles.*
 import computadora.*
 import elementos.*
+import tienda.*
 
 class Escena {
   const property visuales
@@ -48,6 +49,8 @@ const oficina1 = new Escena(
     cliente,
     barraCliente,
     barraComputadora,
+    tienda,
+    entradatienda,
     salida
   ],
   onTicks = [
@@ -62,5 +65,5 @@ const oficina1 = new Escena(
       accion = { barraCliente.paciencia(cliente.llego()) }
     )
   ],
-  celdasBloqueadas = [computadora.position()]
+  celdasBloqueadas = [computadora.position(), tienda.position()]
 )
