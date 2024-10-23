@@ -65,7 +65,7 @@ object jugador {
 		if (self.enTienda()){
 			if(dinero>=100){
 				self.gastarDinero(100)
-				const compuEmpleado = new Computadora(imageString = "computadora.gif", positionXY = game.at(3,7))
+				const compuEmpleado = new Computadora(image = "computadora.gif", position = game.at(3,7))
 				game.addVisual(compuEmpleado)
 				const empleado1 = new Empleado(positionXY = game.at(3,6))
 				game.addVisual(empleado1)
