@@ -169,7 +169,7 @@ object salida {
 }
 
 const cliente = new NPC(
-	objetivo = game.at(5, 1),
+	objetivo = game.at(6, 1),
 	frente = "jugador_frente.png",
 	atras = "jugador_atras.png",
 	izquierda = "jugador_izquierda.png",
@@ -240,7 +240,7 @@ class Barra {
 }
 
 const barraCliente = new Barra(
-	position = game.at(6, 1),
+	position = cliente.objetivo().right(1),
 	lista = listaDeBarrasDescendente
 )
 

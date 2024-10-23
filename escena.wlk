@@ -45,7 +45,7 @@ const oficina1 = new Escena(
     plata,
     silla,
     intelecto,
-    mostrador,
+    mostradorU,
     cliente,
     barraCliente,
     barraComputadora,
