@@ -63,7 +63,13 @@ const oficina1 = new Escena(
       intervalo = 2000,
       nombre = "Barra",
       accion = { barraCliente.paciencia(cliente.llego()) }
+    ),
+    new OnTick(
+      intervalo = 5000,
+      nombre = "Cobrar empleados",
+      accion = {jugador.cobrarEmpleados()}
     )
+    
   ],
   celdasBloqueadas = [computadora.position(), tienda.position()]
 )

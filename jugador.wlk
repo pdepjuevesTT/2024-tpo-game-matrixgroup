@@ -10,6 +10,7 @@ object jugador {
 	var property dinero = 0
 	var property intelecto = 0
 	var property cont = 0
+	var property empleados = []
 	
 	// -------------------
 	method aumentarDinero(monto) {
@@ -18,6 +19,10 @@ object jugador {
 	
 	method aumentarIntelecto(monto) {
 		intelecto += monto
+	}
+
+	method gastarDinero(monto){
+		dinero -= monto
 	}
 	
 	method estaSentado() = self.position() == silla.position()
@@ -52,8 +57,27 @@ object jugador {
 	method tienda(){
 		if (self.enTienda()){
 			game.say(tienda, "J: Empleados $100")
-			game.schedule(1000, {game.say(tienda, "K: Servidores $200")})
+			game.schedule(1500, {game.say(tienda, "K: Servidores $200")})
 		}
+	}
+
+	method comprarEmpleados(){
+		if (self.enTienda()){
+			if(dinero>=100){
+				self.gastarDinero(100)
+				const compuEmpleado = new Computadora(imageString = "computadora.gif", positionXY = game.at(3,7))
+				game.addVisual(compuEmpleado)
+				const empleado1 = new Empleado(positionXY = game.at(3,6))
+				game.addVisual(empleado1)
+				empleados.add(empleado1)
+			}else{
+				game.say(tienda, "No te alcanza")
+			}
+		}
+	}
+
+	method cobrarEmpleados(){
+		empleados.forEach({empleado => empleado.cobrar()})
 	}
 
 	// -------------------- MEJORA
@@ -225,6 +249,15 @@ const barraComputadora = new Barra(
 	lista = listaDeBarrasAscendente
 )
 
+class Empleado {
+  var property positionXY
+  var property image = "jugador_atras.png"
+
+  method position() = positionXY
+  method cobrar(){
+	jugador.aumentarDinero(50)
+  }
+}
 // MEJORAS
 class Mejora {
 	var property requisitoParaMejora
