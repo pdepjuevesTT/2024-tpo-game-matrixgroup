@@ -139,28 +139,36 @@ class NPC {
 	}
 	
 	method mover() {
-		if (!self.llego()) {
-			if (position.x() < objetivo.x()) {
-				position = position.right(1)
-				image = derecha
-			} else {
-				if (position.x() > objetivo.x()) {
-					position = position.left(1)
-					image = izquierda
-				} else {
-					if (position.y() < objetivo.y()) {
-						position = position.up(1)
-						image = atras
-					} else {
-						if (position.y() > objetivo.y()) {
-							position = position.down(1)
-							image = frente
-						}
-					}
-				}
-			}
+		const deltaPosX = objetivo.x() - position.x()
+		const deltaPosY = objetivo.y() - position.y()
+		
+		if (self.llego()) {
+			self.seVa()
+			return
 		}
-		self.seVa()
+
+		if (deltaPosX > 0) {
+			position = position.right(1)
+			image = derecha
+			return
+		}
+		if (deltaPosX < 0) {
+			position = position.left(1)
+			image = izquierda
+			return
+		}
+		if (deltaPosY > 0) {
+			position = position.up(1)
+			image = atras
+			return
+		}
+		if (deltaPosY < 0) {
+			position = position.down(1)
+			image = frente
+			return
+		}
+		
+		return
 	}
 }
 
