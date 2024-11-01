@@ -3,6 +3,8 @@ import utiles.*
 import computadora.*
 import elementos.*
 import tienda.*
+import constantes.*
+import empleado.*
 
 object jugador {
 	var property position = game.center()
@@ -11,7 +13,11 @@ object jugador {
 	var property intelecto = 0
 	var property cont = 0
 	var property empleados = []
-	
+	var property barraProgresoProgramando = new BarraProgreso(
+		position = position.right(1),
+		listaAssets = listaAssetsBarra.reverse()
+	)
+
 	// -------------------
 	method aumentarDinero(monto) {
 		dinero += monto
@@ -20,31 +26,30 @@ object jugador {
 	method aumentarIntelecto(monto) {
 		intelecto += monto
 	}
-
-	method gastarDinero(monto){
+	
+	method gastarDinero(monto) {
 		dinero -= monto
 	}
 	
-	method estaSentado() = self.position() == silla.position()
-	method enTienda() = self.position() == entradatienda.position()
+	method enTienda() = self.position() == entradaTienda.position()
 	// Funcion para que el jugador programe
 	
 	method programar() {
 		//Arranca la cuenta regresiva cuando aprieta la E para programar
-		if (self.estaSentado()) {
+		if (position == computadora.silla().position()) {
 			game.onTick(
 				2000,
 				"Evento de progreso de Codigo",
 				{ self.resultadoProgramar() }
 			)
-			if (barraComputadora.barraFinaliza()) barraComputadora.reiniciarBarra()
+			if (barraProgresoProgramando.finalizoProgreso()) barraProgresoProgramando.reiniciarBarra()
 				// Cuando termina la Barra, se encarga de volver a setear su contador en cero.
 		}
-	}
+	} 
 	
 	method resultadoProgramar() {
-		barraComputadora.paciencia(self.estaSentado())
-		if (barraComputadora.barraFinaliza()) {
+		barraProgresoProgramando.paciencia()
+		if (barraProgresoProgramando.barraFinaliza()) {
 			//En este sector se agrega lo que tiene que pasar cuando termina de programar.
 			self.aumentarIntelecto(1)
 			self.aumentarDinero(51)
@@ -52,40 +57,44 @@ object jugador {
 			game.removeTickEvent("Evento de progreso de Codigo")
 			// Necesario para detener el loop
 		}
+	} 
+	
+	method tienda() {
+		if (self.enTienda()) {
+			// Implementar logica de la tienda
+		}
 	}
 	
-	method tienda(){
-		if (self.enTienda()){
-			game.say(tienda, "J: Empleados $100")
-			game.schedule(1500, {game.say(tienda, "K: Servidores $200")})
-		}
-	}
+ 	method comprarEmpleados() {
 
-	method comprarEmpleados(){
-		if (self.enTienda()){
-			if(dinero>=100){
+			// Implementar logica pero sin carteles
+
+			if (dinero >= 100) {
 				self.gastarDinero(100)
-				const compuEmpleado = new Computadora(image = "computadora.gif", position = game.at(3,7))
+				const compuEmpleado = new Computadora(
+					image = "computadora.gif",
+					position = game.at(3, 7)
+				)
 				game.addVisual(compuEmpleado)
-				const empleado1 = new Empleado(positionXY = game.at(3,6))
+				const empleado1 = new Empleado(position = game.at(3, 6), image = "jugador_atras.png", frente = "jugador_frente.png", atras = "jugador_atras.png", izquierda = "jugador_izquierda.png", derecha = "jugador_derecha.png", objetivo = game.at(3, 6))
 				game.addVisual(empleado1)
 				empleados.add(empleado1)
-			}else{
-				game.say(tienda, "No te alcanza")
+			} else {
+				// Implementar logicas de que no tiene dinero
 			}
-		}
+		
+	} 
+	
+	method cobrarEmpleados() {
+		empleados.forEach({ empleado => empleado.cobrar() })
 	}
-
-	method cobrarEmpleados(){
-		empleados.forEach({empleado => empleado.cobrar()})
-	}
-
+	
 	// -------------------- MEJORA
-	method mejoraJugador() {
+/* 	method mejoraJugador() {
 		// se le pasa la lista de objetos de mejoras, pero viendolo bien, si quisieramos una lista de mejoras de otra cosa, necesitariamos otro contador
 		listaDeMejorasPc.get(self.cont()).mejora()
 		cont += 1
-	}
+	} */
 	
 	// ------------------- MOVIMIENTO
 	method moverseArriba() {
@@ -119,11 +128,11 @@ object jugador {
 		           else position.right(1)
 		image = "jugador_derecha.png"
 	}
-} // ---------------- NPC
+} 
 
 class NPC {
 	var property position = game.origin()
-	var property image = "jugador_frente.png"
+	var property image
 	var property frente
 	var property atras
 	var property izquierda
@@ -132,21 +141,16 @@ class NPC {
 	
 	method llego() = position == objetivo
 	
-	method seVa() {
-		if (barraCliente.barraFinaliza()) {
-			objetivo = game.at(-1, 1)
+	method irse(condicion) {
+		if (condicion) {
+			objetivo = salidaTienda.position()
 		}
 	}
 	
-	method mover() {
+	method moverse() {
 		const deltaPosX = objetivo.x() - position.x()
 		const deltaPosY = objetivo.y() - position.y()
 		
-		if (self.llego()) {
-			self.seVa()
-			return
-		}
-
 		if (deltaPosX > 0) {
 			position = position.right(1)
 			image = derecha
@@ -172,109 +176,11 @@ class NPC {
 	}
 }
 
-object salida {
-	method position() = game.at(-1, 1)
-}
-
-const cliente = new NPC(
-	objetivo = game.at(6, 1),
-	frente = "jugador_frente.png",
-	atras = "jugador_atras.png",
-	izquierda = "jugador_izquierda.png",
-	derecha = "jugador_derecha.png"
-)
-
-//----------------------------------------------
-// Texto contador de dinero del jugador
-object plata {
-	method position() = game.center().right(8).down(5)
-	
-	method text() = jugador.dinero().toString() + " $"
-	
-	method textColor() = "00FF00FF"
-} // Texto contador de intelecto del jugador
-
-object intelecto {
-	method position() = game.center().right(9).down(5)
-	
-	method text() = jugador.intelecto().toString()
-}
-
-object silla {
-	var property position = computadora.position().down(1)
-	
-	method image() = "silla.png"
-}
-
-const listaDeBarrasDescendente = [
-	"barra1.png",
-	"barra2.png",
-	"barra3.png",
-	"barra4.png",
-	"barra4.png"
-]
-
-const listaDeBarrasAscendente = [
-	"barra4.png",
-	"barra3.png",
-	"barra2.png",
-	"barra1.png",
-	"barra1.png"
-]
-
-class Barra {
-	var property position
-	var property image = 0
-	var property contador = 0
-	var property lista
-	var property tamList = lista.size()
-	
-	method barraFinaliza() = contador == tamList
-	
-	// condicionInicioBarra es la posición del objeto en relación al personaje, puede ser por ejemplo cliente.llego() o jugador.estaSentado()
-	method paciencia(condicionInicioBarra) {
-		if (condicionInicioBarra && (contador < tamList)) {
-			image = lista.get(contador)
-			contador += 1
-		}
-		if (self.barraFinaliza()) game.removeVisual(self)
-	}
-	
-	method reiniciarBarra() {
-		game.removeVisual(self)
-		self.contador(0)
-		game.addVisual(self)
-	}
-}
-
-const barraCliente = new Barra(
-	position = cliente.objetivo().right(1),
-	lista = listaDeBarrasDescendente
-)
-
-const barraComputadora = new Barra(
-	position = game.at(5, 9),
-	lista = listaDeBarrasAscendente
-)
-
-class Empleado {
-  var property positionXY
-  var property image = "jugador_atras.png"
-
-  method position() = positionXY
-  method cobrar(){
-	jugador.aumentarDinero(50)
-  }
-}
-// MEJORAS
 class Mejora {
 	var property requisitoParaMejora
-	// Por ejemplo, dinero del jugador > 50 e intelecto > 10
 	var property requisitoPosicionJugador
-	// Donde tiene que estar parado el jugador
-	var property numeroMejora //Se coloca el numero de mejora para usarlo de indice
+	var property numeroMejora
 	var property listaMejoras
-	/*se le pasa la lista de mejoras de un objeto, por ejemplo listaMejorasPc que tiene la pc base, la pc junior, la pc senior, etc...*/
 	var property objetoActual = listaMejoras.get(numeroMejora - 1)
 	var property objetoNuevo = listaMejoras.get(numeroMejora)
 	
@@ -284,8 +190,9 @@ class Mejora {
 			game.addVisual(objetoNuevo)
 		}
 	}
-} // ----------------------------------------------
+} 
 
+/* 
 const mejora1 = new Mejora(
 	numeroMejora = 1,
 	listaMejoras = listaObjetosPc,
@@ -299,10 +206,4 @@ const mejora2 = new Mejora(
 	requisitoParaMejora = { jugador.dinero() > 100 },
 	requisitoPosicionJugador = { jugador.estaSentado() }
 )
-
-// ATENCION!! para agregar una mejora mas, hay que agregar otra imagen a listaObjetosPc
-// --------------------------------------------
-const listaObjetosPc = [computadora, computadora2, computadora3]
-
-// Acá, y en orden hay que agregar los objetos que se van a ir mejorando
-const listaDeMejorasPc = [mejora1, mejora2]
+  */

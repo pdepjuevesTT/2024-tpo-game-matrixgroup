@@ -11,3 +11,7 @@ object celdasOcupadas {
   
   method estaOcupada(posicion) = posiciones.contains(posicion)
 }
+
+class BloqueInvisible {
+  var property position
+}

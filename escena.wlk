@@ -1,13 +1,15 @@
 import jugador.*
 import utiles.*
-import computadora.*
 import elementos.*
 import tienda.*
+import cliente.*
+import computadora.*
+import constantes.*
 
 class Escena {
-  const property visuales
-  const property onTicks
-  const property celdasBloqueadas
+  const property visuales = []
+  const property onTicks = []
+  const property celdasBloqueadas = []
   
   method cargarEscena() {
     // Carga visuales
@@ -38,38 +40,29 @@ class OnTick {
   const property accion
 }
 
-const oficina1 = new Escena(
+const oficina = new Escena(
   visuales = [
     jugador,
     computadora,
     plata,
-    silla,
     intelecto,
     mostradorU,
     cliente,
-    barraCliente,
-    barraComputadora,
     tienda,
-    entradatienda,
-    salida
+    entradaTienda,
+    salidaTienda
   ],
   onTicks = [
     new OnTick(
       intervalo = 500,
       nombre = "cliente",
-      accion = { cliente.mover() }
-    ),
-    new OnTick(
-      intervalo = 2000,
-      nombre = "Barra",
-      accion = { barraCliente.paciencia(cliente.llego()) }
+      accion = { cliente.moverse() }
     ),
     new OnTick(
       intervalo = 5000,
       nombre = "Cobrar empleados",
-      accion = {jugador.cobrarEmpleados()}
+      accion = { jugador.cobrarEmpleados() }
     )
-    
   ],
   celdasBloqueadas = [computadora.position(), tienda.position()]
 )

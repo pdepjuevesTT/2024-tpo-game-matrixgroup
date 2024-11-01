@@ -2,6 +2,7 @@ import wollok.game.*
 import jugador.*
 import utiles.*
 import computadora.*
+import constantes.*
 import elementos.*
 import escena.*
 
@@ -12,9 +13,9 @@ program inicio {
 	game.title("Wollok Tycoon")
 	game.boardGround("fondo_1.png")
 	
-	oficina1.cargarEscena()
+	oficina.cargarEscena()
 	
-	game.onCollideDo(salida, { npc => game.removeVisual(npc) })
+	game.onCollideDo(salidaTienda, { npc => game.removeVisual(npc) })
 	
 	keyboard.up().onPressDo({ jugador.moverseArriba() })
 	keyboard.down().onPressDo({ jugador.moverseAbajo() })
@@ -22,9 +23,9 @@ program inicio {
 	keyboard.right().onPressDo({ jugador.moverseDerecha() })
 	
 	keyboard.e().onPressDo({ jugador.programar() })
-	keyboard.e().onPressDo({ jugador.tienda()})
-	keyboard.r().onPressDo({ jugador.mejoraJugador() })
-	keyboard.j().onPressDo({ jugador.comprarEmpleados()})
+	keyboard.e().onPressDo({ jugador.tienda() })
+	keyboard.j().onPressDo({ jugador.comprarEmpleados() })
+	/* keyboard.r().onPressDo({ jugador.mejoraJugador() }) */
 	
 	game.start()
 }
