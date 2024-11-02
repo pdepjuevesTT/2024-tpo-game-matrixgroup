@@ -69,7 +69,7 @@ const oficina = new Escena(
 
 const portada = new Escena(
   visuales = [
-    inicioG
+    portadaG
   ],
   onTicks = [],
   celdasBloqueadas = []
