@@ -44,7 +44,7 @@ const oficina = new Escena(
   visuales = [
     jugador,
     computadora,
-    plata,
+    dinero,
     intelecto,
     mostradorU,
     cliente,

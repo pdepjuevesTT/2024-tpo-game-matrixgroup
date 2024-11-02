@@ -6,12 +6,13 @@ import tienda.*
 import constantes.*
 import empleado.*
 
+
+
 object jugador {
 	var property position = game.center()
 	var property image = "jugador_frente.png"
-	var property dinero = 0
-	var property intelecto = 0
 	var property cont = 0
+	
 	var property empleados = []
 	var property barraProgresoProgramando = new BarraProgreso(
 		position = computadora.position().up(2),
@@ -19,17 +20,8 @@ object jugador {
 	)
 
 	// -------------------
-	method aumentarDinero(monto) {
-		dinero += monto
-	}
 	
-	method aumentarIntelecto(monto) {
-		intelecto += monto
-	}
 	
-	method gastarDinero(monto) {
-		dinero -= monto
-	}
 	
 	method enTienda() = self.position() == entradaTienda.position()
 	// Funcion para que el jugador programe
@@ -51,8 +43,8 @@ object jugador {
 		barraProgresoProgramando.iniciarBarra()
 		if (barraProgresoProgramando.finalizo()) {
 			//En este sector se agrega lo que tiene que pasar cuando termina de programar.
-			self.aumentarIntelecto(1)
-			self.aumentarDinero(51)
+			intelecto.aumentar(1)
+			dinero.aumentar(51)
 			
 			game.removeTickEvent("Evento de progreso de Codigo")
 			// Necesario para detener el loop
@@ -66,8 +58,8 @@ object jugador {
 	}
 	
  	method comprarEmpleados() {
-			if (dinero >= 100) {
-				self.gastarDinero(100)
+			if (dinero.atributo() >= 100) {
+				dinero.reducir(100)
 				const compuEmpleado = new Computadora(
 					image = "computadora.gif",
 					position = game.at(3, 7)

@@ -50,18 +50,30 @@ class BarraProgreso {
   }
 }
 
-object plata {
+class Aumento {
+  var property atributo = 0
+  
+  method aumentar(monto) {
+    atributo += monto
+  }
+  
+  method reducir(monto) {
+    atributo -= monto
+  }
+}
+
+object dinero inherits Aumento {
   method position() = game.center().right(8).down(5)
   
-  method text() = jugador.dinero().toString() + " $"
+  method text() = atributo.toString() + " $"
   
   method textColor() = "00FF00FF"
 }
 
-object intelecto {
+object intelecto inherits Aumento {
   method position() = game.center().right(9).down(5)
   
-  method text() = jugador.intelecto().toString()
+  method text() = atributo.toString()
 }
 
 object portadaG {

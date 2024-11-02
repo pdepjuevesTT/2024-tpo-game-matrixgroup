@@ -1,4 +1,5 @@
 import jugador.*
+import elementos.*
 
 class Empleado inherits NPC (
   image = "jugador_atras.png",
@@ -12,6 +13,6 @@ class Empleado inherits NPC (
   }
   
   method cobrar() {
-    jugador.aumentarDinero(50)
+    dinero.aumentar(50)
   }
 }
