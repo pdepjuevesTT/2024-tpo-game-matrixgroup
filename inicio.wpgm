@@ -11,7 +11,7 @@ program inicio {
 	game.height(10)
 	game.cellSize(64)
 	game.title("Wollok Tycoon")
-	game.boardGround("fondo_1.png")
+	game.boardGround("oficina.png")
 	
 	oficina.cargarEscena()
 	
@@ -26,6 +26,8 @@ program inicio {
 	keyboard.e().onPressDo({ jugador.tienda() })
 	keyboard.j().onPressDo({ jugador.comprarEmpleados() })
 	/* keyboard.r().onPressDo({ jugador.mejoraJugador() }) */
+	
+	
 	
 	game.start()
 }

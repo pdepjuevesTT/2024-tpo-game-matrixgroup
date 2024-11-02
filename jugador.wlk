@@ -66,9 +66,6 @@ object jugador {
 	}
 	
  	method comprarEmpleados() {
-
-			// Implementar logica pero sin carteles
-
 			if (dinero >= 100) {
 				self.gastarDinero(100)
 				const compuEmpleado = new Computadora(
@@ -79,10 +76,7 @@ object jugador {
 				const empleado1 = new Empleado(position = game.at(3, 6), image = "jugador_atras.png", frente = "jugador_frente.png", atras = "jugador_atras.png", izquierda = "jugador_izquierda.png", derecha = "jugador_derecha.png", objetivo = game.at(3, 6))
 				game.addVisual(empleado1)
 				empleados.add(empleado1)
-			} else {
-				// Implementar logicas de que no tiene dinero
-			}
-		
+			} 
 	} 
 	
 	method cobrarEmpleados() {
