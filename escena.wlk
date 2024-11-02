@@ -66,3 +66,11 @@ const oficina = new Escena(
   ],
   celdasBloqueadas = [computadora.position(), tienda.position()]
 )
+
+const portada = new Escena(
+  visuales = [
+    inicioG
+  ],
+  onTicks = [],
+  celdasBloqueadas = []
+)
