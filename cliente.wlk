@@ -12,7 +12,7 @@ class Cliente inherits NPC (
 ) {
   var property barraProgreso = new BarraProgreso(
     position = objetivo.right(1),
-    listaAssets = listaAssetsBarra.reverse()
+    listaAssets = listaAssetsBarra
   )
   
   override method moverse() {
@@ -23,6 +23,7 @@ class Cliente inherits NPC (
     
     if (self.llego() && (objetivo != salidaTienda.position()))
       barraProgreso.iniciarBarra()
+    
     
     super()
     return

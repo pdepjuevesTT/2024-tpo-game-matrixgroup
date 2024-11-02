@@ -14,7 +14,7 @@ object jugador {
 	var property cont = 0
 	var property empleados = []
 	var property barraProgresoProgramando = new BarraProgreso(
-		position = position.right(1),
+		position = computadora.position().up(2),
 		listaAssets = listaAssetsBarra.reverse()
 	)
 
@@ -42,14 +42,14 @@ object jugador {
 				"Evento de progreso de Codigo",
 				{ self.resultadoProgramar() }
 			)
-			if (barraProgresoProgramando.finalizoProgreso()) barraProgresoProgramando.reiniciarBarra()
+			if (barraProgresoProgramando.finalizo()) barraProgresoProgramando.reiniciarBarra()
 				// Cuando termina la Barra, se encarga de volver a setear su contador en cero.
 		}
 	} 
 	
 	method resultadoProgramar() {
-		barraProgresoProgramando.paciencia()
-		if (barraProgresoProgramando.barraFinaliza()) {
+		barraProgresoProgramando.iniciarBarra()
+		if (barraProgresoProgramando.finalizo()) {
 			//En este sector se agrega lo que tiene que pasar cuando termina de programar.
 			self.aumentarIntelecto(1)
 			self.aumentarDinero(51)
@@ -138,6 +138,7 @@ class NPC {
 	method irse(condicion) {
 		if (condicion) {
 			objetivo = salidaTienda.position()
+			
 		}
 	}
 	
