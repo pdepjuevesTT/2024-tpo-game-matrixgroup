@@ -64,7 +64,7 @@ object intelecto {
   method text() = jugador.intelecto().toString()
 }
 
-object portadaG{
+object portadaG {
   const property position = game.origin()
   const property image = "inicioG.png"
 }
