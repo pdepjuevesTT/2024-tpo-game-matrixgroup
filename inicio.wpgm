@@ -13,7 +13,7 @@ program inicio {
 	game.title("Wollok Tycoon")
 	game.boardGround("oficina.png")
 	
-	oficina.cargarEscena()
+	portada.cargarEscena()
 	
 	game.onCollideDo(salidaTienda, { npc => game.removeVisual(npc) })
 	
@@ -27,7 +27,7 @@ program inicio {
 	keyboard.j().onPressDo({ jugador.comprarEmpleados() })
 	/* keyboard.r().onPressDo({ jugador.mejoraJugador() }) */
 	
-	
+	keyboard.enter().onPressDo({portada.cambiarEscena(oficina)})
 	
 	game.start()
 }
