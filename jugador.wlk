@@ -51,7 +51,8 @@ object jugador {
 	
 	method tienda() {
 		if (self.enTienda()) {
-			// Implementar logica de la tienda
+			game.addVisual(dialogoGame)
+			game.onTick(5000, "aparecer dialogo", {game.removeVisual(dialogoGame)})
 		}
 	}
 	
