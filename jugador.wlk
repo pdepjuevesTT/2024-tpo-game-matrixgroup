@@ -38,7 +38,7 @@ object jugador {
 	} 
 	
 	method resultadoProgramar() {
-		barraProgresoProgramando.iniciarBarra()
+		barraProgresoProgramando.iniciar()
 		if (barraProgresoProgramando.finalizo()) {
 			//En este sector se agrega lo que tiene que pasar cuando termina de programar.
 			intelecto.aumentar(1)
@@ -59,14 +59,7 @@ object jugador {
  	method comprarEmpleados() {
 			if (dinero.atributo() >= 100) {
 				dinero.reducir(100)
-				const compuEmpleado = new Computadora(
-					image = "computadora.gif",
-					position = game.at(3, 7)
-				)
-				game.addVisual(compuEmpleado)
-				const empleado1 = new Empleado(position = game.at(3, 6), image = "jugador_atras.png", frente = "jugador_frente.png", atras = "jugador_atras.png", izquierda = "jugador_izquierda.png", derecha = "jugador_derecha.png", objetivo = game.at(3, 6))
-				game.addVisual(empleado1)
-				empleados.add(empleado1)
+				computadora.nuevaComputadora(0, 7)
 			} 
 	} 
 	
