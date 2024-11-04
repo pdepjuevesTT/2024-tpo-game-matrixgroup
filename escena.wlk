@@ -31,6 +31,10 @@ class Escena {
     onTicks.forEach({ ontick => game.removeTickEvent(ontick.nombre()) })
     celdasBloqueadas.forEach({ celda => celdasOcupadas.desocupar(celda) })
   }
+  method cambiarEscena(escenaNueva) {
+    self.eliminarEscena()
+    escenaNueva.cargarEscena()
+  }
 }
 
 class OnTick {
