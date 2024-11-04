@@ -15,10 +15,6 @@ class Cliente inherits NPC (
     listaAssets = listaAssetsBarra
   )
   
-  method initialize() {
-    game.onTick(500, "cliente", { self.comprar() })
-  }
-  
   method comprar() {
     if (!self.llego()) self.moverse()
     

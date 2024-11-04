@@ -26,10 +26,11 @@ program inicio {
 	/* keyboard.r().onPressDo({ jugador.mejoraJugador() }) */
 	
 	
+	
 	keyboard.enter().onPressDo(
 		{ 
 			portada.eliminarEscena()
-			oficina.cargarEscena()
+			return oficina.cargarEscena()
 		}
 	)
 	
