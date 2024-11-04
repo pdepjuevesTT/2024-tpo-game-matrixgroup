@@ -9,7 +9,6 @@ class Empleado inherits NPC (
   derecha = "jugador_derecha.png"
 ) {
   method initialize() {
-    position = game.at(3, 6)
   }
   
   method cobrar() {
