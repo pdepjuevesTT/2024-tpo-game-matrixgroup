@@ -29,22 +29,15 @@ class BarraProgreso {
   
   method finalizo() = progreso == limite
   
-  method paciencia() {
-    if (self.finalizo()) game.removeVisual(self)
-    else game.schedule(
-        2000,
-        { 
-          progreso += 1
-          image = listaAssets.get(progreso)
-        }
-      )
+  method progresar() {
+    game.schedule(3000, {   progreso += 1image = listaAssets.get(progreso)})
   }
   
-  method iniciarBarra() {
-    if (game.hasVisual(self)) self.paciencia() else game.addVisual(self)
+  method iniciar() {
+    if (game.hasVisual(self)) self.progresar() else game.addVisual(self)
   }
   
-  method reiniciarBarra() {
+  method reiniciar() {
     progreso = 0
     image = listaAssets.get(progreso)
   }

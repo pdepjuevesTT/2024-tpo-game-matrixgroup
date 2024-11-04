@@ -19,12 +19,11 @@ object jugador {
 		listaAssets = listaAssetsBarra.reverse()
 	)
 
-	// -------------------
-	
-	
+	method initialize() {
+		game.onTick(5000, "Cobrar empleados", {self.cobrarEmpleados()})
+	}
 	
 	method enTienda() = self.position() == entradaTienda.position()
-	// Funcion para que el jugador programe
 	
 	method programar() {
 		//Arranca la cuenta regresiva cuando aprieta la E para programar
@@ -35,7 +34,6 @@ object jugador {
 				{ self.resultadoProgramar() }
 			)
 			if (barraProgresoProgramando.finalizo()) barraProgresoProgramando.reiniciarBarra()
-				// Cuando termina la Barra, se encarga de volver a setear su contador en cero.
 		}
 	} 
 	
@@ -126,13 +124,6 @@ class NPC {
 	var property objetivo
 	
 	method llego() = position == objetivo
-	
-	method irse(condicion) {
-		if (condicion) {
-			objetivo = salidaTienda.position()
-			
-		}
-	}
 	
 	method moverse() {
 		const deltaPosX = objetivo.x() - position.x()

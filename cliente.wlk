@@ -4,29 +4,41 @@ import elementos.BarraProgreso
 
 class Cliente inherits NPC (
   image = "jugador_frente.png",
-  objetivo = game.at(6, 1),
+  objetivo = celdaCompra,
   frente = "jugador_frente.png",
   atras = "jugador_atras.png",
   izquierda = "jugador_izquierda.png",
   derecha = "jugador_derecha.png"
 ) {
   var property barraProgreso = new BarraProgreso(
-    position = objetivo.right(1),
+    position = celdaCompra.right(1),
     listaAssets = listaAssetsBarra
   )
   
-  override method moverse() {
-    if (self.llego() && barraProgreso.finalizo()) {
-      self.irse(true)
-      game.removeVisual(barraProgreso)
+  method initialize() {
+    game.onTick(500, "cliente", { self.comprar() })
+  }
+  
+  method comprar() {
+    if (!self.llego()) self.moverse()
+    
+    if (self.llego() && (objetivo == celdaCompra)) {
+      barraProgreso.iniciar()
+      
+      if (barraProgreso.finalizo()) {
+        objetivo = salidaCliente
+        barraProgreso.reiniciar()
+        game.removeVisual(barraProgreso)
+      }
     }
     
-    if (self.llego() && (objetivo != salidaTienda.position()))
-      barraProgreso.iniciarBarra()
-    
-    
-    super()
-    return
+    if (self.llego() && (objetivo == salidaCliente)) game.schedule(
+        6000,
+        { 
+          position = entradaCliente
+          objetivo = celdaCompra
+        }
+      )
   }
 }
 

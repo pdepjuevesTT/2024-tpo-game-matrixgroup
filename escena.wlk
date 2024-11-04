@@ -8,20 +8,10 @@ import constantes.*
 
 class Escena {
   const property visuales = []
-  const property onTicks = []
   const property celdasBloqueadas = []
   
   method cargarEscena() {
-    // Carga visuales
-    visuales.forEach({ visual => game.addVisual(visual) })
-    
-    onTicks.forEach(
-      { ontick => game.onTick(
-          ontick.intervalo(),
-          ontick.nombre(),
-          ontick.accion()
-        ) }
-    ) // Carga onTicks
+    visuales.forEach({ visual => game.addVisual(visual) }) // Carga visuales
     
     celdasBloqueadas.forEach({ celda => celdasOcupadas.ocupar(celda) })
     // Carga celdas bloqueadas
@@ -29,15 +19,8 @@ class Escena {
   
   method eliminarEscena() {
     visuales.forEach({ visual => game.removeVisual(visual) })
-    onTicks.forEach({ ontick => game.removeTickEvent(ontick.nombre()) })
     celdasBloqueadas.forEach({ celda => celdasOcupadas.desocupar(celda) })
   }
-}
-
-class OnTick {
-  const property intervalo
-  const property nombre
-  const property accion
 }
 
 const oficina = new Escena(
@@ -49,26 +32,9 @@ const oficina = new Escena(
     mostradorU,
     cliente,
     tienda,
-    entradaTienda,
-    salidaTienda
-  ],
-  onTicks = [
-    new OnTick(
-      intervalo = 500,
-      nombre = "cliente",
-      accion = { cliente.moverse() }
-    ),
-    new OnTick(
-      intervalo = 5000,
-      nombre = "Cobrar empleados",
-      accion = { jugador.cobrarEmpleados() }
-    )
+    entradaTienda
   ],
   celdasBloqueadas = [computadora.position(), tienda.position()]
 )
 
-const portada = new Escena(
-  visuales = [portadaG],
-  onTicks = [],
-  celdasBloqueadas = []
-)
+const portada = new Escena(visuales = [portadaG], celdasBloqueadas = [])

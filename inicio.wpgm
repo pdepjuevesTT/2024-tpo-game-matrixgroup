@@ -15,8 +15,6 @@ program inicio {
 	
 	portada.cargarEscena()
 	
-	game.onCollideDo(salidaTienda, { npc => game.removeVisual(npc) })
-	
 	keyboard.up().onPressDo({ jugador.moverseArriba() })
 	keyboard.down().onPressDo({ jugador.moverseAbajo() })
 	keyboard.left().onPressDo({ jugador.moverseIzquierda() })

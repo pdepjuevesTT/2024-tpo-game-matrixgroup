@@ -1,4 +1,5 @@
 import utiles.*
+import elementos.*
 
 const listaAssetsBarra = [
   "barra1.png",
@@ -10,4 +11,8 @@ const listaAssetsBarra = [
 
 const entradaTienda = new BloqueInvisible(position = game.at(8, 6))
 
-const salidaTienda = new BloqueInvisible(position = game.at(-1, 1))
+const entradaCliente = game.at(-1, 0)
+
+const salidaCliente = game.at(-1, 1)
+
+const celdaCompra = game.at(6, 1)
