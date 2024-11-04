@@ -78,3 +78,8 @@ object dialogoGame{
   const property position = game.at(8,8)
   const property image = "dialogoG.png"
 }
+
+object dialogoLimite{
+  const property position = game.at(8, 8)
+  const property image = "limitecompra.png" 
+}
