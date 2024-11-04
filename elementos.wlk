@@ -73,3 +73,8 @@ object portadaG {
   const property position = game.origin()
   const property image = "inicioG.png"
 }
+
+object dialogoGame{
+  const property position = game.at(8,8)
+  const property image = "dialogoG.png"
+}
