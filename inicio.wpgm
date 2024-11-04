@@ -25,14 +25,7 @@ program inicio {
 	keyboard.j().onPressDo({ jugador.comprarEmpleados() })
 	/* keyboard.r().onPressDo({ jugador.mejoraJugador() }) */
 	
-	
-	
-	keyboard.enter().onPressDo(
-		{ 
-			portada.eliminarEscena()
-			return oficina.cargarEscena()
-		}
-	)
+	keyboard.enter().onPressDo({portada.cambiarEscena(oficina)})
 	
 	game.start()
 }
