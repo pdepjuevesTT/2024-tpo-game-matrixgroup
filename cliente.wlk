@@ -1,6 +1,6 @@
 import constantes.*
-import jugador.NPC
-import elementos.BarraProgreso
+import jugador.*
+import elementos.*
 
 class Cliente inherits NPC (
   image = "jugador_frente.png",
@@ -14,16 +14,25 @@ class Cliente inherits NPC (
     position = celdaCompra.right(1),
     listaAssets = listaAssetsBarra
   )
+  
+  method irse() {
+    objetivo = salidaCliente
+    barraProgreso.reiniciar()
+    game.removeVisual(barraProgreso)
+  }
+  
   method comprar() {
     if (!self.llego()) self.moverse()
     
     if (self.llego() && (objetivo == celdaCompra)) {
       barraProgreso.iniciar()
-      
-      if (barraProgreso.finalizo()) {
-        objetivo = salidaCliente
-        barraProgreso.reiniciar()
-        game.removeVisual(barraProgreso)
+      if (producto.position() == cliente.position().up(1)) {
+        self.irse()
+        dinero.aumentar(100)
+        producto.sacarProducto()
+        producto.reiniciarPosicion()
+      } else {
+        if (barraProgreso.finalizo()) self.irse()
       }
     }
     

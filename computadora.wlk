@@ -4,12 +4,16 @@ import escena.*
 import empleado.*
 import tienda.*
 import elementos.*
+import constantes.*
+import jugador.*
+
 
 class Computadora {
   var property position
   var property image
   var property silla
-  
+ 
+  	
   method initialize() {
     silla = new Silla(position = self.position().down(1))
     game.addVisual(silla)

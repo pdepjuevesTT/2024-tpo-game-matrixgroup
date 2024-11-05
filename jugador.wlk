@@ -6,26 +6,38 @@ import tienda.*
 import constantes.*
 import empleado.*
 
+object producto{
+	method image() = "producto.png"
+	var property position = computadora.position().left(1)
+	var property flag = true
 
+	method colocarProducto(){
+		if(flag)
+		game.addVisual(self)
+		flag = false
+	}
+	method sacarProducto(){
+		if(!flag )
+		game.removeVisual(self)
+		flag = true
+	}
+	method reiniciarPosicion(){
+		position = computadora.position().left(1)
+	}
+}
 
 object jugador {
 	var property position = game.center()
 	var property image = "jugador_frente.png"
 	var property cont = 0
-	
-	var property empleados = []
-	var property barraProgresoProgramando = new BarraProgreso(
-		position = computadora.position().up(2),
-		listaAssets = listaAssetsBarra.reverse()
-	)
 
-	method initialize() {
-		game.onTick(5000, "Cobrar empleados", {self.cobrarEmpleados()})
-	}
+	var property empleados = []
+
+
 	
-	method enTienda() = self.position() == entradaTienda.position()
-	
-	method programar() {
+
+
+  method programar() {
 		//Arranca la cuenta regresiva cuando aprieta la E para programar
 		if (position == computadora.silla().position()) {
 			game.onTick(
@@ -36,18 +48,40 @@ object jugador {
 			if (barraProgresoProgramando.finalizo()) barraProgresoProgramando.reiniciar()
 		}
 	} 
-	
+	method entregarProducto(){
+		if(position == mostradorU.position().right(1).up(1)){
+			producto.position( mostradorU.position().right(1))
+			producto.colocarProducto()
+		}
+
+	}
+		method sacaProducto(){
+		if(position == producto.position().down(1)) producto.sacarProducto()
+	}
 	method resultadoProgramar() {
 		barraProgresoProgramando.iniciar()
 		if (barraProgresoProgramando.finalizo()) {
 			//En este sector se agrega lo que tiene que pasar cuando termina de programar.
-			intelecto.aumentar(1)
-			dinero.aumentar(51)
-			
+	
+			if(producto.flag()) producto.colocarProducto()
 			game.removeTickEvent("Evento de progreso de Codigo")
 			// Necesario para detener el loop
 		}
 	} 
+var property barraProgresoProgramando = new BarraProgreso(
+		position = computadora.position().up(2),
+		listaAssets = listaAssetsBarra.reverse()
+	)
+
+	method initialize() {
+		game.onTick(5000, "Cobrar empleados", {self.cobrarEmpleados()})
+	}
+	
+	method enTienda() = self.position() == entradaTienda.position()
+	
+	method agarrar(){
+		
+	}
 	
 	method tienda() {
 		if (self.enTienda()) {
