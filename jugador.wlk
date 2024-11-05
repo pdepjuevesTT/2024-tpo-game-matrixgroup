@@ -55,8 +55,6 @@ object jugador {
 		}
 	}
 	
-	// ----------- TIENDA
-	method enTienda() = self.position() == entradaTienda.position()
 	// ---------- EMPLEADOS
 	
 	method cobrarEmpleados() {
