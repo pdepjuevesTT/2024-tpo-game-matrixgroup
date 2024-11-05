@@ -32,7 +32,11 @@ class Cliente inherits NPC (
         producto.sacarProducto()
         producto.reiniciarPosicion()
       } else {
-        if (barraProgreso.finalizo()) self.irse()
+        if (barraProgreso.finalizo()) {
+          vida.reducir(1)
+          self.irse()
+          vida.perder()
+        }
       }
     }
     

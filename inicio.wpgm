@@ -5,7 +5,7 @@ import computadora.*
 import constantes.*
 import elementos.*
 import escena.*
-
+	
 program inicio {
 	game.width(20)
 	game.height(10)

@@ -37,7 +37,8 @@ class BarraProgreso {
           progreso += 1
           image = listaAssets.get(progreso)
         }
-      )}
+      )
+  }
   
   method iniciar() {
     if (game.hasVisual(self)) self.paciencia() else game.addVisual(self)
@@ -61,6 +62,24 @@ class Aumento {
   }
 }
 
+object vida inherits Aumento (atributo = 3) {
+  var property image = "corazon3.png"
+  
+  method position() = game.center().right(6).down(5)
+  
+  override method reducir(monto) {
+    atributo -= monto
+    if (atributo > 0) {
+      image = ("corazon" + atributo) + ".png"
+    }
+  }
+  
+  method perder() {
+    if (atributo == 0) game.stop()
+      // habría que manejar el cambio de escena a la pantalla de perdida.
+  }
+}
+
 object dinero inherits Aumento {
   method position() = game.center().right(8).down(5)
   
@@ -77,20 +96,14 @@ object intelecto inherits Aumento {
 
 class Imagen {
   const property position
-  const property image 
+  const property image
 }
 
-const portadaG = new Imagen(
-  position=game.origin(),
-  image="inicioG.png"
-)
+const portadaG = new Imagen(position = game.origin(), image = "inicioG.png")
 
-const dialogoGame = new Imagen(
-  position=game.at(8,8),
-  image="dialogoG.png"
-)
+const dialogoGame = new Imagen(position = game.at(8, 8), image = "dialogoG.png")
 
 const dialogoLimite = new Imagen(
-  position = game.at(8,8),
-  image="limitecompra.png"
+  position = game.at(8, 8),
+  image = "limitecompra.png"
 )

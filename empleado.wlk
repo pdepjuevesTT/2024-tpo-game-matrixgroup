@@ -9,6 +9,7 @@ class Empleado inherits NPC (
   derecha = "jugador_derecha.png"
 ) {
   method initialize() {
+    
   }
   
   method cobrar() {
