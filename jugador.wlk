@@ -25,11 +25,7 @@ object jugador {
 				"Evento de progreso de Codigo",
 				{ self.resultadoProgramar() }
 			)
-			if (barraProgresoProgramando.finalizo()) {
-				sacoProducto = true
-				
-				barraProgresoProgramando.reiniciar()
-			}
+			if (barraProgresoProgramando.finalizo()) barraProgresoProgramando.reiniciar()
 		}
 	}
 	
@@ -49,14 +45,14 @@ object jugador {
 		barraProgresoProgramando.iniciar()
 		if (barraProgresoProgramando.finalizo()) {
 			//En este sector se agrega lo que tiene que pasar cuando termina de programar.
-			if (producto.flag()) producto.colocarProducto()
+			sacoProducto = true
+			producto.colocarProducto()
 			game.removeTickEvent("Evento de progreso de Codigo")
 			// Necesario para detener el loop
 		}
 	}
 	
 	// ---------- EMPLEADOS
-	
 	method cobrarEmpleados() {
 		empleados.forEach({ empleado => empleado.cobrar() })
 	}
