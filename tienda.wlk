@@ -10,7 +10,7 @@ class Tienda {
   var property position = game.at(8, 7)
   
   method llegoCliente() {
-    if (jugador.enTienda()) {
+    if (self.enTienda()) {
       game.addVisual(dialogoGame)
       game.onTick(5000, "aparecer dialogo", { game.removeVisual(dialogoGame) })
     }
@@ -30,6 +30,8 @@ class Tienda {
     )
     game.addVisual(empleadoN)
   }
+
+  method enTienda() = jugador.position() == entradaTienda.position()
 }
 
 const tienda = new Tienda() //Armo en clase por si queremos actualizar la tienda
