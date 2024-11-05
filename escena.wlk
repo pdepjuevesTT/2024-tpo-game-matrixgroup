@@ -76,4 +76,5 @@ const oficina = new Escena(
   celdasBloqueadas = [computadora.position(), tienda.position()]
 )
 
-const portada = new Escena(visuales = [portadaG], celdasBloqueadas = [])
+const portada = new Escena(visuales = [portadaG])
+const gameover = new Escena(visuales = [imagenGameover])
