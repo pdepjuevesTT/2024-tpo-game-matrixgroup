@@ -14,7 +14,6 @@ class Cliente inherits NPC (
     position = celdaCompra.right(1),
     listaAssets = listaAssetsBarra
   )
-  
   method comprar() {
     if (!self.llego()) self.moverse()
     

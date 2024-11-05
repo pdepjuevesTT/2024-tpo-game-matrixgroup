@@ -33,7 +33,7 @@ object jugador {
 				"Evento de progreso de Codigo",
 				{ self.resultadoProgramar() }
 			)
-			if (barraProgresoProgramando.finalizo()) barraProgresoProgramando.reiniciarBarra()
+			if (barraProgresoProgramando.finalizo()) barraProgresoProgramando.reiniciar()
 		}
 	} 
 	
