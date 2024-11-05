@@ -1,5 +1,6 @@
 import jugador.*
 import elementos.*
+import npc.*
 
 class Empleado inherits NPC (
   image = "jugador_atras.png",

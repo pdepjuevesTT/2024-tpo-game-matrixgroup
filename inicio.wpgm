@@ -5,7 +5,8 @@ import computadora.*
 import constantes.*
 import elementos.*
 import escena.*
-	
+import tienda.*
+
 program inicio {
 	game.width(20)
 	game.height(10)
@@ -21,12 +22,12 @@ program inicio {
 	keyboard.right().onPressDo({ jugador.moverseDerecha() })
 	
 	keyboard.e().onPressDo({ jugador.programar() })
-	keyboard.e().onPressDo({ jugador.tienda() })
-	keyboard.j().onPressDo({ jugador.comprarEmpleados() })
-	/* keyboard.r().onPressDo({ jugador.mejoraJugador() }) */
-	keyboard.r().onPressDo({jugador.entregarProducto()})
-	keyboard.r().onPressDo({jugador.sacaProducto()})
-
+	keyboard.e().onPressDo({ tienda.llegoCliente() })
+	keyboard.j().onPressDo({ tienda.venderEmpleados() })
+	
+	keyboard.r().onPressDo({ jugador.entregarProducto() })
+	keyboard.r().onPressDo({ jugador.sacaProducto() })
+	
 	
 	keyboard.enter().onPressDo({ portada.cambiarEscena(oficina) })
 	

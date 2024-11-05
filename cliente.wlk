@@ -1,6 +1,8 @@
 import constantes.*
 import jugador.*
 import elementos.*
+import computadora.*
+import npc.*
 
 class Cliente inherits NPC (
   image = "jugador_frente.png",
@@ -21,24 +23,30 @@ class Cliente inherits NPC (
     game.removeVisual(barraProgreso)
   }
   
+  method compraExitosa() {
+    self.irse()
+    dinero.aumentar(100)
+    producto.sacarProducto()
+    producto.reiniciarPosicion()
+  }
+  
+  method compraFallida() {
+    if (barraProgreso.finalizo()) {
+      vida.reducir(1)
+      self.irse()
+      vida.perder()
+    }
+  }
+  
   method comprar() {
     if (!self.llego()) self.moverse()
     
     if (self.llego() && (objetivo == celdaCompra)) {
       barraProgreso.iniciar()
-      if (producto.position() == cliente.position().up(1)) {
-        self.irse()
-        dinero.aumentar(100)
-        producto.sacarProducto()
-        producto.reiniciarPosicion()
-      } else {
-        if (barraProgreso.finalizo()) {
-          vida.reducir(1)
-          self.irse()
-          vida.perder()
-        }
-      }
+      if (producto.position() == cliente.position().up(1)) self.compraExitosa()
+      else self.compraFallida()
     }
+    
     
     if (self.llego() && (objetivo == salidaCliente)) game.schedule(
         6000,

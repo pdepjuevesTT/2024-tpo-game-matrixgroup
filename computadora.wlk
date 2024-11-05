@@ -50,6 +50,27 @@ class Computadora {
   }
 }
 
+object producto {
+  var property position = computadora.position().left(1)
+  var property flag = true
+  
+  method image() = "producto.png"
+  
+  method colocarProducto() {
+    if (flag) game.addVisual(self)
+    flag = false
+  }
+  
+  method sacarProducto() {
+    if (!flag) game.removeVisual(self)
+    flag = true
+  }
+  
+  method reiniciarPosicion() {
+    position = computadora.position().left(1)
+  }
+}
+
 class Silla {
   var property position
   

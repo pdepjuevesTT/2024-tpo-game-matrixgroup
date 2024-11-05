@@ -50,7 +50,7 @@ class BarraProgreso {
   }
 }
 
-class Aumento {
+class ModificarAtributo {
   var property atributo = 0
   
   method aumentar(monto) {
@@ -62,7 +62,7 @@ class Aumento {
   }
 }
 
-object vida inherits Aumento (atributo = 3) {
+object vida inherits ModificarAtributo (atributo = 3) {
   var property image = "corazon3.png"
   
   method position() = game.center().right(6).down(5)
@@ -80,7 +80,7 @@ object vida inherits Aumento (atributo = 3) {
   }
 }
 
-object dinero inherits Aumento {
+object dinero inherits ModificarAtributo {
   method position() = game.center().right(8).down(5)
   
   method text() = atributo.toString() + " $"
@@ -89,7 +89,7 @@ object dinero inherits Aumento {
 }
 // la idea es que a las 24 horas salga un cartel como el de stardew valley, dia finalizado, dinero conseguido
 
-object tiempo inherits Aumento (atributo = 7) {
+object tiempo inherits ModificarAtributo (atributo = 7) {
   method position() = game.center().right(9).down(5)
   
   method text() = atributo.toString() + ":00hs"
