@@ -69,17 +69,22 @@ object intelecto inherits Aumento {
   method text() = atributo.toString()
 }
 
-object portadaG {
-  const property position = game.origin()
-  const property image = "inicioG.png"
+class Imagen {
+  const property position
+  const property image 
 }
 
-object dialogoGame{
-  const property position = game.at(8,8)
-  const property image = "dialogoG.png"
-}
+const portadaG = new Imagen(
+  position=game.origin(),
+  image="inicioG.png"
+)
 
-object dialogoLimite{
-  const property position = game.at(8, 8)
-  const property image = "limitecompra.png" 
-}
+const dialogoGame = new Imagen(
+  position=game.at(8,8),
+  image="dialogoG.png"
+)
+
+const dialogoLimite = new Imagen(
+  position = game.at(8,8),
+  image="limitecompra.png"
+)
