@@ -1,5 +1,6 @@
 import utiles.celdasOcupadas
 import jugador.jugador
+import escena.*
 
 object mostradorU {
   var property position = game.at(5, 2)
@@ -75,8 +76,9 @@ object vida inherits Aumento (atributo = 3) {
   }
   
   method perder() {
-    if (atributo == 0) game.stop()
-      // habría que manejar el cambio de escena a la pantalla de perdida.
+    if (atributo == 0) 
+      oficina.cambiarEscena(gameover)
+      keyboard.f().onPressDo({game.stop()})
   }
 }
 
@@ -104,7 +106,6 @@ const portadaG = new Imagen(position = game.origin(), image = "inicioG.png")
 
 const dialogoGame = new Imagen(position = game.at(8, 8), image = "dialogoG.png")
 
-const dialogoLimite = new Imagen(
-  position = game.at(8, 8),
-  image = "limitecompra.png"
-)
+const imagenGameover = new Imagen (position = game.origin(), image = "gameover.png")
+
+const dialogoLimite = new Imagen(position = game.at(8, 8), image = "limitecompra.png")
