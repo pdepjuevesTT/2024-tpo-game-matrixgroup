@@ -10,6 +10,7 @@ object jugador {
 	var property position = game.center()
 	var property image = "jugador_frente.png"
 	var property empleados = []
+	var property sacoProducto = false
 	var property barraProgresoProgramando = new BarraProgreso(
 		position = computadora.position().up(2),
 		listaAssets = listaAssetsBarra.reverse()
@@ -24,14 +25,19 @@ object jugador {
 				"Evento de progreso de Codigo",
 				{ self.resultadoProgramar() }
 			)
-			if (barraProgresoProgramando.finalizo()) barraProgresoProgramando.reiniciar()
+			if (barraProgresoProgramando.finalizo()) {
+				sacoProducto = true
+				
+				barraProgresoProgramando.reiniciar()
+			}
 		}
 	}
 	
 	method entregarProducto() {
-		if (position == mostradorU.position().right(1).up(1)) {
+		if ((position == mostradorU.position().right(1).up(1)) && sacoProducto) {
 			producto.position(mostradorU.position().right(1))
 			producto.colocarProducto()
+			sacoProducto = false
 		}
 	}
 	
