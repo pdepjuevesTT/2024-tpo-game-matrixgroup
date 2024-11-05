@@ -87,11 +87,12 @@ object dinero inherits Aumento {
   
   method textColor() = "00FF00FF"
 }
+// la idea es que a las 24 horas salga un cartel como el de stardew valley, dia finalizado, dinero conseguido
 
-object intelecto inherits Aumento {
+object tiempo inherits Aumento (atributo = 7) {
   method position() = game.center().right(9).down(5)
   
-  method text() = atributo.toString()
+  method text() = atributo.toString() + ":00hs"
 }
 
 class Imagen {

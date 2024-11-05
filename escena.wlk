@@ -49,7 +49,7 @@ const oficina = new Escena(
     jugador,
     computadora,
     dinero,
-    intelecto,
+    tiempo,
     mostradorU,
     cliente,
     tienda,
@@ -66,6 +66,11 @@ const oficina = new Escena(
       intervalo = 5000,
       nombre = "Cobrar empleados",
       accion = { jugador.cobrarEmpleados() }
+    ),
+    new OnTick(
+      intervalo = 5000,
+      nombre = "corre el tiempo",
+      accion = { tiempo.aumentar(1) }
     )
   ],
   celdasBloqueadas = [computadora.position(), tienda.position()]
