@@ -10,6 +10,7 @@ class Escena {
   const property visuales = []
   const property onTicks = []
   const property celdasBloqueadas = []
+  const property musica
   
   method cargarEscena() {
     visuales.forEach({ visual => game.addVisual(visual) }) // Carga visuales
@@ -23,6 +24,9 @@ class Escena {
     ) // Carga onTicks
     
     celdasBloqueadas.forEach({ celda => celdasOcupadas.ocupar(celda) })
+    
+    self.play(musica)
+    
     // Carga celdas bloqueadas
   }
   
@@ -34,7 +38,12 @@ class Escena {
   
   method cambiarEscena(escenaNueva) {
     self.eliminarEscena()
+    game.sound("click.mp3").play()
     escenaNueva.cargarEscena()
+  }
+
+  method play(sonido){
+    game.sound(sonido).play()
   }
 }
 
@@ -73,8 +82,10 @@ const oficina = new Escena(
       accion = { tiempo.aumentar(1) }
     )
   ],
-  celdasBloqueadas = [computadora.position(), tienda.position()]
+  celdasBloqueadas = [computadora.position(), tienda.position()
+  ],
+  musica = "musica.mp3"
 )
 
-const portada = new Escena(visuales = [portadaG])
-const gameover = new Escena(visuales = [imagenGameover])
+const portada = new Escena(visuales = [portadaG], musica = "nada")
+const gameover = new Escena(visuales = [imagenGameover], musica = "gameover.mp3")

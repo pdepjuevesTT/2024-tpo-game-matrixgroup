@@ -19,6 +19,7 @@ class Tienda {
   method venderEmpleados() {
     if (dinero.atributo() >= 100) {
       dinero.reducir(100)
+      oficina.play("compratienda.mp3")
       computadora.nuevaComputadora(0, 7)
     }
   }

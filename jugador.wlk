@@ -20,6 +20,7 @@ object jugador {
 	method programar() {
 		//Arranca la cuenta regresiva cuando aprieta la E para programar
 		if (position == computadora.silla().position()) {
+			oficina.play("programar.mp3")
 			game.onTick(
 				2000,
 				"Evento de progreso de Codigo",

@@ -3,6 +3,7 @@ import jugador.*
 import elementos.*
 import computadora.*
 import npc.*
+import escena.oficina
 
 class Cliente inherits NPC (
   image = "jugador_frente.png",
@@ -43,7 +44,10 @@ class Cliente inherits NPC (
     
     if (self.llego() && (objetivo == celdaCompra)) {
       barraProgreso.iniciar()
-      if (producto.position() == cliente.position().up(1)) self.compraExitosa()
+      if (producto.position() == cliente.position().up(1)){
+            self.compraExitosa()
+            oficina.play("ventacliente.mp3")
+      } 
       else self.compraFallida()
     }
     
