@@ -76,9 +76,8 @@ object vida inherits ModificarAtributo (atributo = 3) {
   }
   
   method perder() {
-  if (atributo == 0)
-      oficina.cambiarEscena(gameover)
-      keyboard.f().onPressDo({game.stop()})
+    if (atributo == 0) oficina.cambiarEscena(gameover)
+    keyboard.f().onPressDo({ game.stop() })
   }
 }
 
@@ -106,6 +105,12 @@ const portadaG = new Imagen(position = game.origin(), image = "inicioG.png")
 
 const dialogoGame = new Imagen(position = game.at(8, 8), image = "dialogoG.png")
 
-const imagenGameover = new Imagen (position = game.origin(), image = "gameover.png")
+const imagenGameover = new Imagen(
+  position = game.origin(),
+  image = "gameover.png"
+)
 
-const dialogoLimite = new Imagen(position = game.at(8, 8), image = "limitecompra.png")
+const dialogoLimite = new Imagen(
+  position = game.at(8, 8),
+  image = "limitecompra.png"
+)
