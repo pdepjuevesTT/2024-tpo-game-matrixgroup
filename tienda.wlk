@@ -30,6 +30,7 @@ class Tienda {
       objetivo = game.at(posX, posY)
     )
     game.addVisual(empleadoN)
+    jugador.empleados().add(empleadoN)
   }
 
   method enTienda() = jugador.position() == entradaTienda.position()

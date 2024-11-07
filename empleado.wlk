@@ -14,6 +14,6 @@ class Empleado inherits NPC (
   }
   
   method cobrar() {
-    dinero.aumentar(50)
+    dinero.aumentar(25)
   }
 }

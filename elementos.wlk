@@ -76,7 +76,7 @@ object vida inherits ModificarAtributo (atributo = 3) {
   }
   
   method perder() {
-    if (atributo == 0) 
+  if (atributo == 0)
       oficina.cambiarEscena(gameover)
       keyboard.f().onPressDo({game.stop()})
   }
