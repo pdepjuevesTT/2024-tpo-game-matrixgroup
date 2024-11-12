@@ -11,7 +11,7 @@ const listaAssetsBarra = [
 
 const entradaTienda = new BloqueInvisible(position = game.at(8, 6))
 
-const entradaCliente = game.at(-1, 0)
+const entradaCliente = game.at(-2, 0)
 
 const salidaCliente = game.at(-1, 1)
 

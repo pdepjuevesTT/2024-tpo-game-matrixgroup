@@ -20,7 +20,6 @@ class Cliente inherits NPC (
   
   method irse() {
     objetivo = salidaCliente
-    barraProgreso.reiniciar()
     game.removeVisual(barraProgreso)
   }
   
@@ -33,8 +32,8 @@ class Cliente inherits NPC (
   
   method compraFallida() {
     if (barraProgreso.finalizo()) {
-      vida.reducir(1)
       self.irse()
+      vida.reducir(1)
       vida.perder()
     }
   }
@@ -44,11 +43,12 @@ class Cliente inherits NPC (
     
     if (self.llego() && (objetivo == celdaCompra)) {
       barraProgreso.iniciar()
-      if (producto.position() == cliente.position().up(1)){
-            self.compraExitosa()
-            oficina.play("ventacliente.mp3")
-      } 
-      else self.compraFallida()
+      if (producto.position() == cliente.position().up(1)) {
+        self.compraExitosa()
+        oficina.play("ventacliente.mp3")
+      } else {
+        self.compraFallida()
+      }
     }
     
     
@@ -57,6 +57,7 @@ class Cliente inherits NPC (
         { 
           position = entradaCliente
           objetivo = celdaCompra
+          barraProgreso.reiniciar()
         }
       )
   }
