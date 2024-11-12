@@ -44,22 +44,20 @@ class Cliente inherits NPC (
     
     if (self.llego() && (objetivo == celdaCompra)) {
       barraProgreso.iniciar()
-      if (producto.position() == cliente.position().up(1)) {
-        self.compraExitosa()
-        oficina.play("ventacliente.mp3")
-      } else {
-        self.compraFallida()
-      }
+      if (producto.position() == cliente.position().up(1)){
+            self.compraExitosa()
+            oficina.play("ventacliente.mp3")
+      } 
+      else self.compraFallida()
     }
     
     
-    if (self.llego() && (objetivo == salidaCliente)) {
-      objetivo = entradaCliente
-    }
-    
-    if (self.llego() && (objetivo == entradaCliente)) game.schedule(
+    if (self.llego() && (objetivo == salidaCliente)) game.schedule(
         6000,
-        { objetivo = celdaCompra }
+        { 
+          position = entradaCliente
+          objetivo = celdaCompra
+        }
       )
   }
 }
