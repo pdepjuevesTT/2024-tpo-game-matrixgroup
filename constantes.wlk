@@ -1,5 +1,6 @@
 import utiles.*
 import elementos.*
+import computadora.*
 
 const listaAssetsBarra = [
   "barra1.png",

@@ -29,14 +29,13 @@ class Computadora {
         position = game.at(posX, posY),
         image = "computadora.gif"
       )
-
-      tienda.nuevoEmpleado(posX, posY-1)
+      
+      tienda.nuevoEmpleado(posX, posY - 1)
       game.addVisual(compu)
       oficina.celdasBloqueadas().add(compu.position())
       return
-
-      } else {
-      self.nuevaComputadora(posX + 1, posY)
+    } else {
+      self.nuevaComputadora(posX + 2, posY)
     }
   }
 }
