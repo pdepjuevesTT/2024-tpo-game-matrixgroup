@@ -5,6 +5,8 @@ import tienda.*
 import cliente.*
 import computadora.*
 import constantes.*
+import wollok.game.*
+import paredes.*
 
 class Escena {
   const property visuales = []
@@ -23,11 +25,18 @@ class Escena {
         ) }
     ) // Carga onTicks
     
+    (0 .. 5).forEach(
+      { n => new Pared(position = new Position(x = 11, y = n - 3)).dibujar() }
+    )
+    (0 .. 7).forEach(
+      { n => new ParedInvertida(
+          position = new Position(x = 11 + n, y = 5)
+        ).dibujar() }
+    )
+    
     celdasBloqueadas.forEach({ celda => celdasOcupadas.ocupar(celda) })
     
-    self.play(musica)
-    
-    // Carga celdas bloqueadas
+    self.play(musica) // Carga celdas bloqueadas
   }
   
   method eliminarEscena() {
@@ -41,8 +50,8 @@ class Escena {
     game.sound("click.mp3").play()
     escenaNueva.cargarEscena()
   }
-
-  method play(sonido){
+  
+  method play(sonido) {
     game.sound(sonido).play()
   }
 }
@@ -63,7 +72,8 @@ const oficina = new Escena(
     cliente,
     tienda,
     entradaTienda,
-    vida
+    vida,
+    sofa
   ],
   onTicks = [
     new OnTick(
@@ -82,10 +92,13 @@ const oficina = new Escena(
       accion = { tiempo.aumentar(1) }
     )
   ],
-  celdasBloqueadas = [computadora.position(), tienda.position()
-  ],
+  celdasBloqueadas = [computadora.position(), tienda.position()],
   musica = "musica.mp3"
 )
 
 const portada = new Escena(visuales = [portadaG], musica = "nada")
-const gameover = new Escena(visuales = [imagenGameover], musica = "gameover.mp3")
+
+const gameover = new Escena(
+  visuales = [imagenGameover],
+  musica = "gameover.mp3"
+)

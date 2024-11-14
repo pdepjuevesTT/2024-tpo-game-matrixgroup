@@ -114,3 +114,5 @@ const dialogoLimite = new Imagen(
   position = game.at(8, 8),
   image = "limitecompra.png"
 )
+
+const sofa = new Imagen(position = game.at(15, 2), image = "sofa2.png")
