@@ -29,7 +29,7 @@ program inicio {
 	keyboard.r().onPressDo({ jugador.entregarProducto() })
 	keyboard.r().onPressDo({ jugador.sacaProducto() })
 	
-	keyboard.enter().onPressDo({ portada.cambiarEscena(oficina) })
+	keyboard.enter().onPressDo({ if (!oficina.visible()) {portada.cambiarEscena(oficina)} })
 	
 
 	game.start()

@@ -13,8 +13,10 @@ class Escena {
   const property onTicks = []
   const property celdasBloqueadas = []
   const property musica
+  var property visible = false
   
   method cargarEscena() {
+    visible = true
     visuales.forEach({ visual => game.addVisual(visual) }) // Carga visuales
     
     onTicks.forEach(
@@ -25,21 +27,13 @@ class Escena {
         ) }
     ) // Carga onTicks
     
-    (0 .. 5).forEach(
-      { n => new Pared(position = new Position(x = 11, y = n - 3)).dibujar() }
-    )
-    (0 .. 7).forEach(
-      { n => new ParedInvertida(
-          position = new Position(x = 11 + n, y = 5)
-        ).dibujar() }
-    )
-    
     celdasBloqueadas.forEach({ celda => celdasOcupadas.ocupar(celda) })
     
     self.play(musica) // Carga celdas bloqueadas
   }
   
   method eliminarEscena() {
+    visible = false
     visuales.forEach({ visual => game.removeVisual(visual) })
     onTicks.forEach({ ontick => game.removeTickEvent(ontick.nombre()) })
     celdasBloqueadas.forEach({ celda => celdasOcupadas.desocupar(celda) })
@@ -73,7 +67,8 @@ const oficina = new Escena(
     tienda,
     entradaTienda,
     vida,
-    sofa
+    sofa,
+    pared
   ],
   onTicks = [
     new OnTick(
