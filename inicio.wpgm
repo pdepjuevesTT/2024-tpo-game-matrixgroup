@@ -6,7 +6,7 @@ import constantes.*
 import elementos.*
 import escena.*
 import tienda.*
-
+import cliente.*
 program inicio {	
 	game.width(20)
 	game.height(10)

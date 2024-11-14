@@ -20,6 +20,8 @@ class Cliente inherits NPC (
   
   method irse() {
     objetivo = salidaCliente
+    barraProgreso.reiniciar()
+    
     game.removeVisual(barraProgreso)
   }
   
@@ -51,23 +53,23 @@ class Cliente inherits NPC (
       }
     }
     
+    if (game.onSameCell(position, salidaCliente)) barraProgreso.reiniciar()
     
     if (self.llego() && (objetivo == salidaCliente)) game.schedule(
-        6000,
+        3500,
         { 
           position = entradaCliente
           objetivo = celdaCompra
-          barraProgreso.reiniciar()
         }
       )
   }
 }
 
 const cliente = new Cliente(
-  image = "jugador_frente.png",
-  objetivo = game.at(6, 1),
-  frente = "jugador_frente.png",
-  atras = "jugador_atras.png",
-  izquierda = "jugador_izquierda.png",
-  derecha = "jugador_derecha.png"
+  image = "npc2_frente.png",
+  objetivo = celdaCompra,
+  frente = "npc2_frente.png",
+  atras = "npc2_atras.png",
+  izquierda = "npc2_izquierda.png",
+  derecha = "npc2_derecha.png"
 )
