@@ -116,3 +116,12 @@ const dialogoLimite = new Imagen(
 )
 
 const sofa = new Imagen(position = game.at(15, 2), image = "sofa2.png")
+
+const maquinaExpendedora = new Imagen(
+  position = game.at(18, 4),
+  image = "maquinaExpendedora.png"
+)
+
+const cafetera = new Imagen(position = game.at(16, 2), image = "cafetera.png")
+
+const pingpong = new Imagen(position = game.at(12, 1), image = "pingpong.png")

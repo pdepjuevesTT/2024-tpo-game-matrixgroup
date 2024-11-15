@@ -68,7 +68,10 @@ const oficina = new Escena(
     entradaTienda,
     vida,
     sofa,
-    pared
+    pared,
+    maquinaExpendedora,
+    cafetera,
+    pingpong
   ],
   onTicks = [
     new OnTick(
