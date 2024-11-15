@@ -17,10 +17,10 @@ program inicio {
 	
 	portada.cargarEscena()
 	
-	keyboard.up().onPressDo({ jugador.moverseArriba() })
-	keyboard.down().onPressDo({ jugador.moverseAbajo() })
-	keyboard.left().onPressDo({ jugador.moverseIzquierda() })
-	keyboard.right().onPressDo({ jugador.moverseDerecha() })
+	keyboard.up().onPressDo({ jugador.moverse(arriba) })
+	keyboard.down().onPressDo({ jugador.moverse(abajo) })
+	keyboard.left().onPressDo({ jugador.moverse(izquierda) })
+	keyboard.right().onPressDo({ jugador.moverse(derecha) })
 	
 	keyboard.e().onPressDo({ jugador.programar() })
 	keyboard.e().onPressDo({ tienda.llegoCliente() })

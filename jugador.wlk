@@ -63,35 +63,50 @@ object jugador {
 	}
 	
 	// ------------------- MOVIMIENTO
-	method moverseArriba() {
-		position = if (((position.y() + 1) > 7) || celdasOcupadas.estaOcupada(
-		           		position.up(1)
-		           	)) position
-		           else position.up(1)
-		image = "jugador_atras.png"
+	method moverse(direccion) {
+		const nuevaPosicion = direccion.siguiente(position)
+		
+		if (zonaValida.dentroDelLimite(nuevaPosicion) && !celdasOcupadas.estaOcupada(
+			nuevaPosicion
+		)) {
+			position = nuevaPosicion
+		}
+		
+		image = ("jugador_" + direccion.orientacion()) + ".png"
 	}
+}
+
+object zonaValida {
+	const maxHeight = 7
+	const minHeight = 0
+	const maxWidth = 19
+	const minWidth = 0
 	
-	method moverseAbajo() {
-		position = if (((position.y() - 1) < 0) || celdasOcupadas.estaOcupada(
-		           		position.down(1)
-		           	)) position
-		           else position.down(1)
-		image = "jugador_frente.png"
-	}
+	method dentroDelLimite(
+		position
+	) = (((position.x() >= minWidth) && (position.x() <= maxWidth)) && (position.y() >= minHeight)) && (position.y() <= maxHeight)
+}
+
+object arriba {
+	method siguiente(position) = position.up(1)
 	
-	method moverseIzquierda() {
-		position = if (((position.x() - 1) < 0) || celdasOcupadas.estaOcupada(
-		           		position.left(1)
-		           	)) position
-		           else position.left(1)
-		image = "jugador_izquierda.png"
-	}
+	method orientacion() = "atras"
+}
+
+object abajo {
+	method siguiente(position) = position.down(1)
 	
-	method moverseDerecha() {
-		position = if (((position.x() + 1) > 19) || celdasOcupadas.estaOcupada(
-		           		position.right(1)
-		           	)) position
-		           else position.right(1)
-		image = "jugador_derecha.png"
-	}
+	method orientacion() = "frente"
+}
+
+object derecha {
+	method siguiente(position) = position.right(1)
+	
+	method orientacion() = "derecha"
+}
+
+object izquierda {
+	method siguiente(position) = position.left(1)
+	
+	method orientacion() = "izquierda"
 }
